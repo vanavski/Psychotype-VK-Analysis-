@@ -3,4 +3,5 @@
 from ConfigurationsAPI import ConfigAPI
 
 c = ConfigAPI
-c.ConfigAPI.init(c)
+config = c.ConfigAPI()
+config.init()
