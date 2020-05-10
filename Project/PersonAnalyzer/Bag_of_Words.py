@@ -3,6 +3,12 @@ import stanfordnlp
 from spacy_stanfordnlp import StanfordNLPLanguage
 from sklearn.feature_extraction.text import CountVectorizer
 
+# use new conda env 3.7.
+# Open conda terminal
+# add command: conda install pytorch=0.4.1 -c pytorch
+# after pip install stanfordnlp
+# pip install spacy-stanfordnlp
+
 class Bag_Words(object):
 
     # config = None
@@ -14,13 +20,13 @@ class Bag_Words(object):
     def __clean_text(self, df):
         config = {
             'processors': 'tokenize,pos,lemma,depparse',  # Comma-separated list of processors to use
-            'lang': 'en',  # Language code for the language to build the Pipeline in
-            'tokenize_model_path': 'C:\\Users\\79196\\stanfordnlp_resources\\ru_syntagrus_models\\ru_syntagrus_tokenizer.pt',
-            'pos_model_path': 'C:\\Users\\79196\\stanfordnlp_resources\\ru_syntagrus_models\\ru_syntagrus_tagger.pt',
-            'pos_pretrain_path': 'C:\\Users\\79196\\stanfordnlp_resources\\ru_syntagrus_models\\ru_syntagrus.pretrain.pt',
-            'lemma_model_path': 'C:\\Users\\79196\\stanfordnlp_resources\\ru_syntagrus_models\\ru_syntagrus_lemmatizer.pt',
-            'depparse_model_path': 'C:\\Users\\79196\\stanfordnlp_resources\\ru_syntagrus_models\\ru_syntagrus_parser.pt',
-            'depparse_pretrain_path': 'C:\\Users\\79196\\stanfordnlp_resources\\ru_syntagrus_models\\ru_syntagrus.pretrain.pt'
+            'lang': 'ru',  # Language code for the language to build the Pipeline in
+            'tokenize_model_path': 'C:\\1Vadim\IT\\Repositories\\KURSACH\\Project\\stanfordnlp\\stanfordnlp_resources\\ru_syntagrus_models\\ru_syntagrus_tokenizer.pt',
+            'pos_model_path': 'C:\\1Vadim\IT\\Repositories\\KURSACH\\Project\\stanfordnlp\\stanfordnlp_resources\\ru_syntagrus_models\\ru_syntagrus_tagger.pt',
+            'pos_pretrain_path': 'C:\\1Vadim\IT\\Repositories\\KURSACH\\Project\\stanfordnlp\\stanfordnlp_resources\\ru_syntagrus_models\\ru_syntagrus.pretrain.pt',
+            'lemma_model_path': 'C:\\1Vadim\IT\\Repositories\\KURSACH\\Project\\stanfordnlp\\stanfordnlp_resources\\ru_syntagrus_models\\ru_syntagrus_lemmatizer.pt',
+            'depparse_model_path': 'C:\\1Vadim\IT\\Repositories\\KURSACH\\Project\\stanfordnlp\\stanfordnlp_resources\\ru_syntagrus_models\\ru_syntagrus_parser.pt',
+            'depparse_pretrain_path': 'C:\\1Vadim\IT\\Repositories\\KURSACH\\Project\\stanfordnlp\\stanfordnlp_resources\\ru_syntagrus_models\\ru_syntagrus.pretrain.pt'
         }
 
         snlp = stanfordnlp.Pipeline(**config)
@@ -54,3 +60,4 @@ data = list()
 data.append(text)
 df = pd.DataFrame(data=data, columns = ['Text'])
 b = Bag_Words.bag_of_words(Bag_Words, df)
+print(b)
