@@ -4,6 +4,7 @@ import stanfordnlp
 from spacy_stanfordnlp import StanfordNLPLanguage
 from sklearn.feature_extraction.text import CountVectorizer
 
+
 # use new conda env 3.7.
 # Open conda terminal
 # add command: conda install pytorch=0.4.1 -c pytorch
@@ -11,7 +12,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 # pip install spacy-stanfordnlp
 
 class Bag_Words(object):
-    def init(self):
+    def __clean_text(self, df):
         config = {
             'processors': 'tokenize,pos,lemma,depparse',  # Comma-separated list of processors to use
             'lang': 'ru',  # Language code for the language to build the Pipeline in
@@ -25,10 +26,8 @@ class Bag_Words(object):
 
         snlp = stanfordnlp.Pipeline(**config)
         nlp = StanfordNLPLanguage(snlp)
-        return nlp
 
-    def __clean_text(self, df, nlp):
-        text_list = df["text"].values
+        text_list = df["Text"].values
         lower_text_list = []
         for text in text_list:
             text_lower = text.lower()
@@ -41,14 +40,14 @@ class Bag_Words(object):
 
         return clean_text_list
 
-    def bag_of_words(self, df, nlp):
-        text = self.__clean_text(self, df, nlp)
-        
+    def bag_of_words(self, df):
+        text = self.__clean_text(self, df)
+
         udf = pd.DataFrame(data=text[0], columns=['text'])
         udf = udf['text'].value_counts()
 
         kdf = pd.DataFrame(columns=['text', 'count'])
         kdf['text'] = udf.index
         kdf['count'] = udf.values
-        print(kdf[:30])
-        return kdf
+        print(kdf[:20])
+        return kdf[:30]
