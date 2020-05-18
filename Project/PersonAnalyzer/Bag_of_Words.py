@@ -11,7 +11,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 # pip install spacy-stanfordnlp
 
 class Bag_Words(object):
-    def __clean_text(self, df):
+    def init(self):
         config = {
             'processors': 'tokenize,pos,lemma,depparse',  # Comma-separated list of processors to use
             'lang': 'ru',  # Language code for the language to build the Pipeline in
@@ -25,8 +25,10 @@ class Bag_Words(object):
 
         snlp = stanfordnlp.Pipeline(**config)
         nlp = StanfordNLPLanguage(snlp)
+        return nlp
 
-        text_list = df["Text"].values
+    def __clean_text(self, df, nlp):
+        text_list = df["text"].values
         lower_text_list = []
         for text in text_list:
             text_lower = text.lower()
@@ -39,8 +41,8 @@ class Bag_Words(object):
 
         return clean_text_list
 
-    def bag_of_words(self, df):
-        text = self.__clean_text(self, df)
+    def bag_of_words(self, df, nlp):
+        text = self.__clean_text(self, df, nlp)
         
         udf = pd.DataFrame(data=text[0], columns=['text'])
         udf = udf['text'].value_counts()
@@ -48,28 +50,5 @@ class Bag_Words(object):
         kdf = pd.DataFrame(columns=['text', 'count'])
         kdf['text'] = udf.index
         kdf['count'] = udf.values
-        print(kdf)
-
-        # bag = None
-        # for phrase in text:
-        #     # print(phrase)
-        #     vectorizer = CountVectorizer()
-        #     bag = vectorizer.fit_transform(phrase).todense()
-        #     # print(bag)
-        # return bag
-
-text_sentiment_columns = ['Text']
-text = 'биржа привет биржу существуют биржи'
-# text = 'Биржа копирайтинга Text.ru — это достойный заработок для копирайтеров и возможность заказать текст у профессиональных авторов. Здесь вы можете реализовать свой творческий потенциал или приобрести уникальные статьи для нужд своего сайта.'
-data = list()
-data.append(text)
-df = pd.DataFrame(data=data, columns = ['Text'])
-a = Bag_Words.bag_of_words(Bag_Words, df)
-
-
-# b = np.ascontiguousarray(a).view(np.dtype((np.void, a.dtype.itemsize * a.shape[1])))
-# _, idx = np.unique(b, return_index=True)
-# unique_a = a[idx]
-# print(unique_a)
-
-
+        print(kdf[:30])
+        return kdf
