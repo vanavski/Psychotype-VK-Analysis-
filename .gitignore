@@ -1,0 +1,11 @@
+Project/venv/
+Project/closedFriends10385605.xlsx
+Project/output1.csv
+Project/photos_info10385605.xlsx
+Project/tematics10385605.xlsx
+Project/user10385605.csv
+Project/stanfordnlp/stanfordnlp_resources/ru_syntagrus_models/ru_syntagrus.pretrain.pt
+Project/stanfordnlp/stanfordnlp_resources/ru_syntagrus_models/ru_syntagrus_lemmatizer.pt
+Project/stanfordnlp/stanfordnlp_resources/ru_syntagrus_models/ru_syntagrus_parser.pt
+Project/stanfordnlp/stanfordnlp_resources/ru_syntagrus_models/ru_syntagrus_tagger.pt
+Project/stanfordnlp/stanfordnlp_resources/ru_syntagrus_models/ru_syntagrus_tokenizer.pt
