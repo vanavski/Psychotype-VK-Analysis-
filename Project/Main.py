@@ -1,7 +1,7 @@
-# add to git
-
 from ConfigurationsAPI import ConfigAPI
 
+
+# Подключаем интерфейс-обработчик
 c = ConfigAPI
 config = c.ConfigAPI()
-config.init()
+config.init() #метод запускающий приложение

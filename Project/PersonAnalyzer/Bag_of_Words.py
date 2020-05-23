@@ -4,7 +4,7 @@ import stanfordnlp
 from spacy_stanfordnlp import StanfordNLPLanguage
 from sklearn.feature_extraction.text import CountVectorizer
 
-
+#Что нужно, чтобы установить нлп стэнфорд библиотеку
 # use new conda env 3.7.
 # Open conda terminal
 # add command: conda install pytorch=0.4.1 -c pytorch
@@ -12,6 +12,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 # pip install spacy-stanfordnlp
 
 class Bag_Words(object):
+    #текст к нижнему регистру, убирает пунктуацию, стоп-слова, лемматизирует
     def __clean_text(self, df):
         config = {
             'processors': 'tokenize,pos,lemma,depparse',  # Comma-separated list of processors to use
@@ -40,6 +41,7 @@ class Bag_Words(object):
 
         return clean_text_list
 
+    #Собирает текстовые данные в удобный формат таблицы
     def bag_of_words(self, df):
         text = self.__clean_text(self, df)
 

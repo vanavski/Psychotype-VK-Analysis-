@@ -5,14 +5,15 @@ class ConfigAPI(object):
     __token = None
     api = None
 
+    #Стартовый обработчик. Подключает TOKEN VK API к приложению
     def init(self):
         print('Вставьте ссылку в строку браузера для получения токена VK API. ')
         print('https://oauth.vk.com/authorize?client_id=7305133&display=page&scope=status,video,photos,friends,wall,notes,groups,docs&response_type=token&v=5.103&state=123456')
         print('После скопируйте ссылку из браузера и вставьте сюда')
         val = str(input())
-        self.__get_token_by_link(val)
-        self.__vk_api_on()
-        Miner.Miner().init(self.api)
+        self.__get_token_by_link(val) #токен обрабатывается на ошибки в этом методе
+        self.__vk_api_on() # подключение VK API к системе
+        Miner.Miner().init(self.api) #запуск обработчика команд
 
 
     def __get_token_by_link(self, str):
