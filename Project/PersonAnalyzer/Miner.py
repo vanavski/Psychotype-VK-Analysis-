@@ -226,9 +226,9 @@ class Miner(object):
         df = df.reset_index()
         df = df.drop('index', axis=1)
 
-        avatars = df[df['album_id'] == -6]
-
-        top_count = avatars['likes'][0]
+        # avatars = df[df['album_id'] == -6]
+        avatars = df
+        # top_count = avatars['likes'][0]
         summ = avatars['likes'].sum()
         summ = summ / len(avatars['likes'])
         print('Среднее кол-во лайков: {}, остальная информация в файле photos_info{}'.format(summ, id))
@@ -241,6 +241,8 @@ class Miner(object):
             activity.remove('Закрытая группа')
         while 'Открытая группа' in activity:
             activity.remove('Открытая группа')
+        while 'Публичная страница' in activity:
+            activity.remove('Публичная страница')
         return activity
 
     #Получить топ тематик групп пользователя
@@ -260,7 +262,7 @@ class Miner(object):
         udf = udf.drop('index', axis=1)
         print('')
         print('Топ тематик групп:')
-        print(udf)
+        print(udf[:30])
         print('')
         udf.to_excel("tematics{}.xlsx".format(us_id))
         return udf
@@ -311,7 +313,7 @@ class Miner(object):
         print('')
         print('Топ близких друзей:')
         print('')
-        print(df)
+        print(df[:30])
         print('')
         df.to_excel('closedFriends{}.xlsx'.format(us_id))
         return df
